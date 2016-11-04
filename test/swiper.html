@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" >
+    <meta name="view-port" content="width=device-width,minmum-scale=1.0,maxmum-scale=1.0">
+    <title>Title</title>
+
+
+    <script src="../js/jquery-1.11.1.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src="../js/jquery.fullPage.min.js"></script>
+
+
+<style>
+    body,html {
+        width: 100%;
+        height: 100%;
+        margin:0;
+        padding:0;
+
+    }
+
+
+    .swiper-container  {
+        width:100%;
+        height: 100%;
+    }
+
+    .p1 {
+        background: red;
+        width: 100%;
+        height: 100%;
+    }
+
+    .p2 {
+        background-color: #007aff;
+        width: 100%;
+        height: 100%;
+    }
+
+    .p3 {
+        background-color: aqua;
+        width: 100%;
+        height: 100%;
+    }
+
+    h1 {
+        margin:0;
+        padding: 0;
+        font-size:20px;
+        color: #fff;
+        display: none;
+    }
+
+
+</style>
+</head>
+
+<body>
+
+
+    <div id="html5">
+        <div class="section page" id="p1">
+            <h1>hhjdfhjd</h1>
+        </div>
+        <div class="section page" id="p2">
+            <h1>hhjdfhjd</h1>
+        </div>
+        <div class="section page" id="p3">
+            <h1>hhjdfhjd</h1>
+        </div>
+        <div class="section page" id="p4">
+            <h1>hhjdfhjd</h1>
+        </div>
+    </div>
+<script>
+$(function(){
+    var Oh1 = $('h1');
+    var Opage = $('.page');
+   $('#html5').fullpage({
+       'sectionsColor':['red','blue','green','aqua'],
+       onLeave:function(index,nextindex,direction){
+           $('#html5').find('.page').eq(index-1).trigger('onLeave');
+           Oh1.eq(index-1).fadeOut();
+           Oh1.eq(index-1).trigger('onLeave');
+       },
+       onLoad:function(anchorLink,index,nextindex,direction){
+           $('#html5').find('.page').eq(index-1).trigger('onLoad');
+       },
+       afterLoad:function(anchorLink,index,nextindex,direction){
+           $('#html5').find('.page').eq(index-1).trigger('afterLoad');
+           Oh1.eq(index-1).fadeIn();
+       }
+   });
+    
+    Opage.on('onLeave',function(){
+        console.log($(this).attr('id')+'=== > onLeave');
+    });
+
+   Opage.on('onLoad',function(){
+        console.log($(this).attr('id')+'=== > onLoad');
+    });
+
+    Opage.on('afterLoad',function(){
+        console.log($(this).attr('id')+'=== > afterLoad');
+    });
+
+    Oh1.on('onLeave',function(){
+        console.log($(this)+'=== > onLeave');
+    })
+});
+</script>
+</body>
+</html>
